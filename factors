@@ -1,0 +1,36 @@
+import sys
+
+def check_factor(num1, num2, num3):
+  """Checks if num2 is a factor of num1 and num3.
+
+  Args:
+    num1: The first number.
+    num2: The second number.
+    num3: The third number.
+
+  Returns:
+    A string representation of the factors of num1 and num3.
+  """
+
+  if num2 > num1:
+    numcp = num1
+    num1 = num2
+    num2 = numcp
+
+  return f"{num1}={num2}*{num3}"
+
+def main():
+  """The main function."""
+
+  if len(sys.argv) != 2:
+    print("Usage: factors <file>")
+    exit(1)
+
+  with open(sys.argv[1]) as f:
+    for line in f:
+      factors = line.split()
+      result = check_factor(*factors)
+      print(result)
+
+if __name__ == "__main__":
+  main()
