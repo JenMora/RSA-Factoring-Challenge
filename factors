@@ -1,36 +1,29 @@
-import sys
+#!/usr/bin/python3
+"""factorize given set of numbers in a file to product of two small numbers"""
+from sys import argv
 
-def check_factor(num1, num2, num3):
-  """Checks if num2 is a factor of num1 and num3.
 
-  Args:
-    num1: The first number.
-    num2: The second number.
-    num3: The third number.
+def factorize(number_to_check):
+    """"find two small numbers that multiply to give a given number"""
+    i = 2
 
-  Returns:
-    A string representation of the factors of num1 and num3.
-  """
+    if number_to_check < 2:
+        return
+    
+    while number_to_check % i:
+        i += 1
+    print("{:.0f}={:.0f}*{:.0f}".format(number_to_check, number_to_check / i, i))
 
-  if num2 > num1:
-    numcp = num1
-    num1 = num2
-    num2 = numcp
+if len(argv) != 2:
+    exit()
 
-  return f"{num1}={num2}*{num3}"
+try:
+    with open(argv[1]) as file:
+        line = file.readline()
 
-def main():
-  """The main function."""
-
-  if len(sys.argv) != 2:
-    print("Usage: factors <file>")
-    exit(1)
-
-  with open(sys.argv[1]) as f:
-    for line in f:
-      factors = line.split()
-      result = check_factor(*factors)
-      print(result)
-
-if __name__ == "__main__":
-  main()
+        while line != "":
+            number_to_check = int(line.split('\n')[0])
+            factorize(number_to_check)
+            line = file.readline()
+except:
+    pass
